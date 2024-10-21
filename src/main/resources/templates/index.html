@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{/images/file_image.svg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=PT+Serif&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <title >FileQuash</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="logo-div">
+            <img th:src="@{/images/logo.png}" alt=""> 
+            <h1 class="kaushan">FileQuash</h1>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <a href="#" onclick="closeSideBar()" ><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#001F3F"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a>
+            <a  onclick="pricingPopUp()" class="pt-serif">Pricing</a>
+            <a href="" class="pt-serif">About Us</a>  
+        </div>
+
+        <div style="display: flex;">
+            <div class="nav-items hideOnMobile">
+                <a  onclick="pricingPopUp()" class="pt-serif hideOnMobile">Pricing</a>
+                <a href="#footer" class="pt-serif hideOnMobile">About Us</a>  
+            </div>
+            <div class="nav-items hamburger">
+                <a href="#" onclick=showSideBar()><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a>
+            </div>
+        </div>   
+    </nav>
+
+    <section id="main">
+        <div class="container-1" >
+            <h1 class="bebas">File Compressor</h1>
+            
+            <label for="input-file" id="drop-area" class="drop-area">
+            	<th:block th:if="${isProcessed}">
+            		
+            		<div class="download-div" style="margin:10px; ">
+            			<form th:action="@{download-file}">
+	            		<p>Your file have successfully processed</p>
+	            		<br>
+	            		<div style="display:flex">
+	            			<div style="margin:20px;">
+	            				<img th:src="@{/images/simple-file.png}"  style="width: 100px; height: 100px;" alt="" />
+	            				<p th:if="${flag==0}">before compress</p>
+								<p th:if="${flag==1}">compressed size</p>
+	            				
+	            				<span th:text="${orignal_size}"></span> 
+	            			</div>
+	            			<div style="margin:20px;">
+	            				<img th:src="@{/images/file_image.svg}"  style="width: 100px; height: 100px;" alt="" />
+	            				<p th:if="${flag==0}">after compress</p>
+								<p th:if="${flag==1}">decompressed size</p>
+	            				<span th:text="${new_size}"></span> 
+	            			</div>
+	            		</div>
+	            		<button class="compress-btn" > Download File</button>
+	            		</form>
+            		</div>
+    			</th:block>
+            	
+                <th:block th:unless="${isProcessed}">
+                	
+                	<form th:action="@{compress-file}" method="post" style="width:100%" id="form1" enctype="multipart/form-data"> 
+				        <input type="file" name="file" accept=".txt" id="input-file" hidden>
+	                	<input type="hidden" id="baseImageUrl" th:value="@{/images/}" />
+	                	
+	                	<div class="img-view">
+	                    	<img th:src="@{/images/file_image.svg}" style="width: 100px; height: 100px; margin: 20px;" alt="">
+	                    	<p>Click here <br>to upload text</p>
+	                    	<span>Upload any text files form desktop</span>
+	               		</div>
+               		</form> 
+			    </th:block>
+                
+            </label>
+        </div>
+<!-- <div id="loader" class="loader" style="display:none;"></div> -->
+        
+    </section>
+
+    <section id="mid" >
+        <div class="container-2">
+            <div class="subcontainer-1">
+                <h1 class="bebas">Best Online Text-File Compressor</h1>
+                <p>FileQuash is an online tool made for compressing large Text Files online for free. Whether you need to optimize TEXT documents for easier emailing, sharing, or storage, you’ll be ready to go within seconds.</p>
+            </div>
+
+            <div class="subcontainer-2">
+                <div class="mini-sub" style="display: flex; justify-content: center; align-items: center;">
+                    <div>
+                        <h1 class="bebas">Flexible Text file Compression</h1>
+                        <p>Quick, professional results you can trust—every time.Whether you need to optimize TEXT documents for easier emailing, sharing, or storage, you’ll be ready to go within seconds.
+                        </p>
+                    </div> 
+                </div>
+                <div>
+                    <img th:src="@{/images/txt_img_icon.png}" alt="">
+                </div>
+            </div>
+
+            <div  class="subcontainer-2">
+                <div>
+                    <img th:src="@{/images/file_comp.svg}" alt="">
+                </div>
+
+                <div class="mini-sub" style="display: flex; justify-content: center; align-items: center;">
+                    <div>
+                        <h1 class="bebas">How Does File Compression works?</h1>
+                        <p>It uses the <span style="font-size: 20px; font-weight: bold;">Huffman Coding </span>algorithm for efficient file compression, reducing the file size by assigning shorter binary codes to frequently occurring characters and longer codes to less frequent ones, ensuring optimal compression without losing any data.</p>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="subcontainer-1" style="margin-top: 100px !important;">
+                <h1 class="bebas">How HUFFMAN CODING ALGORITHM works?</h1>
+                <img class="gif" th:src="@{/images/Huffman_demo.gif}" alt="">
+                <p>Huffman Coding is an efficient algorithm used for lossless data compression. It reduces the size of files by encoding the most frequent characters with shorter binary codes and less frequent characters with longer binary codes, ensuring optimal file size reduction without losing any data.</p>
+                <p class="pt-serif">Read more at: <a href="https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/">Huffman Coding Algo</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="footer">
+        <div class="footer" >
+            <div class="subfooter-1">
+                <h1 class="bebas" style="color: white !important;">Get In Touch</h1>
+                <p>Let's connect! Whether it's discussing innovative development, exploring new technologies, or brainstorming solutions, I’m always excited to collaborate. Reach out for any inquiries, partnerships, or just a friendly chat!</p>
+                <div class="profile-icons">
+                    <a href=""><i class="fa-brands fa-square-instagram" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a>
+                    <a href="mailto:shreeyashjanawade@gmail.com"><i class="fa-solid fa-envelope" style="color: #ffffff;"></i></a>
+                </div>
+            </div>
+            <div class="subfooter-2">
+    
+                <div class="shape" onclick="routeLinkedIn()">
+                    <div class="icon">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </div>
+                    <p>linkedin/shreeyash</p>
+                </div>
+
+                <div class="shape" onclick="routeMail()">
+                    <div class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <p>shreeyashjanawade@gmail.com</p>
+                </div>
+                 
+            </div>
+        </div>
+    </section>
+
+    <script th:src="@{/script.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+</body>
+</html>
