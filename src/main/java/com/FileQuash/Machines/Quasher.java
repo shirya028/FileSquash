@@ -26,7 +26,7 @@ public class Quasher {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             
-            // Write the byte array and the map to the output stream
+            
             objectOutputStream.writeObject(huffManBytes);
             objectOutputStream.writeObject(huffmap);
             processedFileContent = byteArrayOutputStream.toByteArray();
@@ -58,8 +58,7 @@ public class Quasher {
         PriorityQueue<ByteNode> nodes = new PriorityQueue<ByteNode>();
         Map<Byte ,Integer> tempMap =new HashMap<>();
 
-        //frequency save krtoy aapn kiti vela aly character in form of byte
-        //eg : 'A' occured 2 times then, map will have:- 65 : 2
+        
         for(byte b : bytes) {
             tempMap.put( b , tempMap.getOrDefault(b, 0) +1 );
         }
